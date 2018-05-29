@@ -1,0 +1,15 @@
+{
+    "name": "vyygir/gf-postcode-lookup",
+    "description": "A field for Gravity Forms that allows postcode look-up implementations using th getaddress.io API",
+    "type": "project",
+    "require": {
+        "philcross/getaddress-php": "^0.1.0",
+        "anthonybudd/wp_ajax": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Vyygir",
+            "email": "open.source@vyygir.me"
+        }
+    ]
+}

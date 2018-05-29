@@ -1,0 +1,90 @@
+// libraries
+@import '~sweetalert2/dist/sweetalert2.min';
+
+// plugin styles
+.gfpcl {
+    // initial form
+    &-initial {
+        position: relative;
+
+        // loading state
+        &.loading::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &::before {
+            content: "";
+            display: block;
+            background-color: rgba(#fff, 0.75);
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.15s ease-in-out;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 500;
+        }
+
+        // search input
+        .field {
+            position: relative;
+        }
+
+        // lookup results
+        .lookup-results {
+            display: none;
+            background-color: #fff;
+            max-height: 300px;
+            overflow-y: scroll;
+            box-shadow: 0 4px 12px rgba(#000, 0.25);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            z-index: 100;
+
+            .result-list {
+                margin: 0;
+                padding: 10px 0;
+                list-style-type: none;
+
+                .result {
+                    padding: 5px 15px;
+
+                    &:hover {
+                        background-color: #0074A2;
+                        cursor: pointer;
+
+                        .first-line, .sub-lines {
+                            color: #fff;
+                        }
+                    }
+
+                    .first-line {
+                        margin: 0;
+                        font-size: 15px;
+                        font-weight: bold;
+                        line-height: 20px;
+                    }
+
+                    .sub-lines {
+                        display: block;
+                        color: #666;
+                        font-size: 12px;
+                        line-height: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+    // address fields
+    &-address-fields {
+        display: none;
+    }
+}
