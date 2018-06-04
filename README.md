@@ -1,4 +1,4 @@
-<h4 align="center">⚠️ This plugin is still in development. If you experience any issues, please [create an issue](https://github.com/Vyygir/gf-postcode-lookup/issues/new). ⚠️</h4>
+<h4 align="center">⚠️ This plugin is still in development. If you experience any issues, please <a href="https://github.com/Vyygir/gf-postcode-lookup/issues/new" target="_blank">create an issue</a>. ⚠️</h4>
 
 # Gravity Forms Postcode Lookup
 
