@@ -29,6 +29,13 @@ define('GF_POSTCODE_LOOKUP_PATH', plugin_dir_path(__FILE__));
 define('GF_POSTCODE_LOOKUP_URL', plugin_dir_url(__FILE__));
 define('GF_POSTCODE_LOOKUP_DOMAIN', 'gf-postcode-lookup');
 
+// initialise the customised updater
+require_once GF_POSTCODE_LOOKUP_PATH . 'includes/class-updater.php';
+
+if (is_admin()) {
+    new Postcode_Lookup_Updater(__FILE__, 'vyygir', 'gf-postcode-lookup');
+}
+
 // create the GF add-on
 add_action('gform_loaded', function() {
     if (method_exists('GFForms', 'include_addon_framework')) {
