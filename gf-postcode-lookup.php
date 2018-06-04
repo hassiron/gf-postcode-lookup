@@ -12,7 +12,7 @@
  * Plugin Name: Gravity Forms: Postcode Look-up Field
  * Plugin URI: https://www.github.com/vyygir/gf-postcode-lookup
  * Description: A field for Gravity Forms that allows postcode look-up implementations using the getaddress.io API
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Vyygir
  * Author URI: https://vyygir.me
  * Text Domain: gf-postcode-lookup
