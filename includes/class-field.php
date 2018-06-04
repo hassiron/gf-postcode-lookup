@@ -211,43 +211,37 @@ class Postcode_Lookup_Field extends GF_Field {
     }
 
     public function get_value_entry_detail($value, $currency = '', $use_text = false, $format = 'html', $media = 'screen') {
-        var_dump($value);
+        $value = json_decode($value);
+        $line1 = isset($value->line_1) ? esc_html($value->line_1) : '';
+        $line2 = isset($value->line_2) ? esc_html($value->line_2) : '';
+        $city = isset($value->city) ? esc_html($value->city) : '';
+        $county = isset($value->county) ? esc_html($value->county) : '';
+        $postcode = isset($value->postcode) ? esc_html($value->postcode) : '';
+        $line_break = ($format === 'html') ? '<br>' : "\n";
 
-        if (is_array($value)) {
-            $line1 = trim(rgget($this->id . '.1', $value));
-            $line2 = trim(rgget($this->id . '.2', $value));
-            $city = trim(rgget($this->id . '.city', $value));
-            $county = trim(rgget($this->id . '.county', $value));
-            $postcode = trim(rgget($this->id . '.postcode', $value));
+        $address = $line1;
+        $address .= !empty($address) && !empty($line2) ? $line_break . $line2 : '';
+        $address .= !empty($address) && !empty($city) ? $line_break . $city : '';
+        $address .= !empty($address) && !empty($county) ? $line_break . $county : '';
+        $address .= !empty($address) && !empty($postcode) ? $line_break . $postcode : '';
 
-            if ($format === 'html') {
-                $line1 = esc_html($line1);
-                $line2 = esc_html($line2);
-                $city = esc_html($city);
-                $county = esc_html($county);
-                $postcode = esc_html($postcode);
-
-                $line_break = '<br />';
-            } else {
-                $line_break = "\n";
-            }
-
-            $address = $line1;
-            $address .= !empty($address) && !empty($line2) ? $line_break . $line2 : '';
-            $address .= !empty($address) && !empty($city) ? $line_break . $city : '';
-            $address .= !empty($address) && !empty($county) ? $line_break . $county : '';
-            $address .= !empty($address) && !empty($postcode) ? $line_break . $postcode : '';
-
-            // @TODO implement toggling map link
-            if (!empty($address) && $format == 'html') {
-                $address_qs = str_replace($line_break, ' ', $address);
-                $address_qs = urlencode($address_qs);
-                $address .= sprintf('<br><a href="https://maps.google.com/maps?q=%s" target="_blank">View on Google Maps</a>', $address_qs);
-            }
-
-            return $address;
-        } else {
-            return '';
+        // @TODO implement toggling map link
+        if (!empty($address) && $format == 'html') {
+            $address_qs = str_replace($line_break, ' ', $address);
+            $address_qs = urlencode($address_qs);
+            $address .= sprintf('<br><a href="https://maps.google.com/maps?q=%s" target="_blank">View on Google Maps</a>', $address_qs);
         }
+
+        return $address;
+    }
+
+    public function get_value_entry_list($value, $entry, $field_id, $columns, $form) {
+        $value = json_decode($value);
+
+        return sprintf(
+            '%s %s',
+            isset($value->line_1) ? esc_html($value->line_1) . ',' : '',
+            isset($value->postcode) ? esc_html($value->postcode) : ''
+        );
     }
 }

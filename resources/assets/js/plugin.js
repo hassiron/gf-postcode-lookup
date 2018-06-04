@@ -41,6 +41,7 @@ $(function () {
     const $resultList = $resultDropdown.children('.result-list');
     const $addressFields = dollar('.address-fields');
     const $formToggle = $('#toggle-form-state');
+    const $fillableField = dollar('.fillable');
     
     if ($trigger.length) {
         $trigger.on('click', function (event) {
@@ -111,19 +112,29 @@ $(function () {
         $(document).on('click', '.result-list .result', function () {
             let $result = $(this);
             let lines = $result.data();
+            let addressComponents = {};
 
             for (let line in lines) {
-                if (fieldAssociations.hasOwnProperty(line)) {
+                if (line in fieldAssociations) {
                     let $input = $(`#${$addressFields.attr('id')}_${fieldAssociations[line]}`);
 
                     if ($input.length) {
                         $input.val(lines[line]);
+
+                        if (line !== 'postcode') {
+                            addressComponents[line] = lines[line].trim();
+                        }
                     }
                 }
             }
 
             $resultDropdown.hide();
             $addressFields.stop().slideDown();
+
+            if (Object.keys(addressComponents).length) {
+                addressComponents['postcode'] = $postcodeInput.val().trim();
+                $fillableField.val(JSON.stringify(addressComponents));
+            }
         });
 
         $postcodeInput.on('keyup keydown', function (event) {
@@ -148,6 +159,25 @@ $(function () {
 
             $searchWrap.stop().slideToggle();
             $addressFields.stop().slideToggle();
+        });
+
+        /**
+         * Concatenate address fields if changed manually to re-populate the fillable field
+         */
+        let $addressFieldInputs = $addressFields.find('input');
+
+        $addressFieldInputs.on('keyup', function () {
+            let addressComponents = {};
+
+            $addressFieldInputs.each(function () {
+                let $input = $(this);
+
+                addressComponents[$input.data('line')] = $input.val().trim();
+            });
+
+            if (Object.keys(addressComponents).length) {
+                $fillableField.val(JSON.stringify(addressComponents));
+            }
         });
     }
 });

@@ -19,26 +19,28 @@
 <div class="gfpcl-address-fields ginput_complex ginput_container" id="<?= $field_id; ?>">
     <div class="address-field address-1">
         <label for="<?= $field_id; ?>_1">Address Line 1</label>
-        <input type="text" id="<?= $field_id; ?>_1" type="text" name="input_<?= $id; ?>.1" <?= $attributes['required']; ?>>
+        <input type="text" id="<?= $field_id; ?>_1" type="text" name="input_<?= $id; ?>_1" <?= $attributes['required']; ?> data-line="address_1">
     </div>
 
     <div class="address-field address-2">
         <label for="<?= $field_id; ?>_2">Address Line 2</label>
-        <input type="text" id="<?= $field_id; ?>_2" type="text" name="input_<?= $id; ?>.2">
+        <input type="text" id="<?= $field_id; ?>_2" type="text" name="input_<?= $id; ?>_2" data-line="address_2">
     </div>
 
     <div class="address-field address-city">
         <label for="<?= $field_id; ?>_city">City</label>
-        <input type="text" id="<?= $field_id; ?>_city" type="text" name="input_<?= $id; ?>.city">
+        <input type="text" id="<?= $field_id; ?>_city" type="text" name="input_<?= $id; ?>_city" data-line="city">
     </div>
 
     <div class="address-field address-county">
         <label for="<?= $field_id; ?>_county">County</label>
-        <input type="text" id="<?= $field_id; ?>_county" type="text" name="input_<?= $id; ?>.county">
+        <input type="text" id="<?= $field_id; ?>_county" type="text" name="input_<?= $id; ?>_county" data-county="county">
     </div>
 
     <div class="address-field address-postcode">
         <label for="<?= $field_id; ?>_postcode">Postcode</label>
-        <input type="text" id="<?= $field_id; ?>_postcode" type="text" name="input_<?= $id; ?>.postcode" <?= $attributes['required']; ?>>
+        <input type="text" id="<?= $field_id; ?>_postcode" type="text" name="input_<?= $id; ?>_postcode" <?= $attributes['required']; ?> data-postcode="postcode">
     </div>
 </div>
+
+<input name="input_<?= $id; ?>" id="<?= $field_id; ?>" type="hidden" value="<?= $value; ?>" class="<?= $class; ?> gfpcl-fillable" <?= $attributes['required']; ?>>
